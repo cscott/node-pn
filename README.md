@@ -135,5 +135,5 @@ THE SOFTWARE.
 [NPM1]: https://nodei.co/npm/pn.png
 [NPM2]: https://nodei.co/npm/pn/
 
-[1]: https://travis-ci.org/cscott/pn.svg
-[2]: https://travis-ci.org/cscott/pn
+[1]: https://travis-ci.org/cscott/node-pn.svg
+[2]: https://travis-ci.org/cscott/node-pn
