@@ -1,5 +1,6 @@
 var dns = require("dns");
 var promisify = require("./_promisify.js");
+var bind = function(c, f) { return f && f.bind(c); };
 Object.defineProperties(module.exports, {
   ADDRGETNETWORKPARAMS: { enumerable: true, value: dns.ADDRGETNETWORKPARAMS },
   ADNAME: { enumerable: true, value: dns.ADNAME },
@@ -31,7 +32,7 @@ Object.defineProperties(module.exports, {
   resolve6: { enumerable: true, value: promisify(dns, dns.resolve6, 1) },
   resolveCname: { enumerable: true, value: promisify(dns, dns.resolveCname, 1) },
   resolveMx: { enumerable: true, value: promisify(dns, dns.resolveMx, 1) },
-  resolveNaptr: { enumerable: true, value: dns.resolveNaptr.bind(dns) },
+  resolveNaptr: { enumerable: true, value: bind(dns, dns.resolveNaptr) },
   resolveNs: { enumerable: true, value: promisify(dns, dns.resolveNs, 1) },
   resolveSrv: { enumerable: true, value: promisify(dns, dns.resolveSrv, 1) },
   resolveTxt: { enumerable: true, value: promisify(dns, dns.resolveTxt, 1) },

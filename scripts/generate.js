@@ -133,6 +133,7 @@ sorted(Object.keys(packages)).forEach(function(pkgname) {
         emit('module.exports = '+pkgname+';');
     } else {
         emit('var promisify = require("./_promisify.js");');
+        emit('var bind = function(c, f) { return f && f.bind(c); };');
         emit('Object.defineProperties(module.exports, {');
         sorted(Object.keys(m)).forEach(function(prop) {
             var opts = pkgopts[prop] || {};
@@ -163,7 +164,7 @@ sorted(Object.keys(packages)).forEach(function(pkgname) {
             var isAsync = (typeof(m[prop+'Sync']) === 'function');
             if (opts.promisify) { isAsync = true; }
             if (!isAsync) {
-                emit(out+'value: '+pkgname+'.'+prop+'.bind('+pkgname+') },');
+                emit(out+'value: bind('+pkgname+', '+pkgname+'.'+prop+') },');
                 return;
             }
             // OK, this is very likely an async function!

@@ -1,5 +1,6 @@
 var stream = require("stream");
 var promisify = require("./_promisify.js");
+var bind = function(c, f) { return f && f.bind(c); };
 Object.defineProperties(module.exports, {
   Duplex: { enumerable: true, value: stream.Duplex },
   PassThrough: { enumerable: true, value: stream.PassThrough },
