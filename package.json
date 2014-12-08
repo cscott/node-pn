@@ -1,0 +1,21 @@
+{
+  "name": "P",
+  "version": "0.0.0",
+  "description": "Promisify the node standard library.",
+  "scripts": {
+    "generate": "scripts/generate.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cscott/node-P"
+  },
+  "keywords": [
+    "promise", "node"
+  ],
+  "author": "C. Scott Ananian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cscott/node-P/issues"
+  }
+}
