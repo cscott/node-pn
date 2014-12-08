@@ -1,5 +1,5 @@
 {
-  "name": "P",
+  "name": "pn",
   "version": "0.0.0",
   "description": "Promisify the node standard library.",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/cscott/node-P"
+    "url": "git://github.com/cscott/node-pn"
   },
   "keywords": [
     "promise", "node"
@@ -16,6 +16,6 @@
   "author": "C. Scott Ananian",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cscott/node-P/issues"
+    "url": "https://github.com/cscott/node-pn/issues"
   }
 }

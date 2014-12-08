@@ -1,6 +1,6 @@
-# P
+# pn
 
-The `P` library gives you the Promise-using node standard library
+The `pn` library gives you the Promise-using node standard library
 you've always dreamed of.
 
 Just about every node standard library method that takes a callback will now
@@ -10,11 +10,11 @@ See below for a few exceptions and odd cases.
 
 ## Installation
 ```
-npm install P
+npm install pn
 ```
 ## Usage
 ```
-var fs = require('P/fs');
+var fs = require('pn/fs');
 fs.writeFile('foo', 'bar', 'utf-8').then(function() { console.log('done'); });
 ```
 
@@ -25,9 +25,9 @@ You can use the [`es6-shim`](https://www.npmjs.org/package/promised-node)
 to add ES6 Promises to earlier versions of node, for example:
 ```
 require('es6-shim');
-var fs = require('P/fs');
+var fs = require('pn/fs');
 ```
-Just be sure that `es6-shim` is loaded before the `P` package in that
+Just be sure that `es6-shim` is loaded before the `pn` package in that
 case.
 
 You might also want to look into packages like
