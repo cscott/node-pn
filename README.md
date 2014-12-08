@@ -7,7 +7,9 @@ The `pn` library gives you the Promise-using node standard library
 you've always dreamed of.  Think "Promised Node" when saying it.
 
 Just about every node standard library method that takes a callback will now
-return a `Promise` iff no callback is supplied.
+return a `Promise` iff no callback is supplied.  But existing code
+that passes callbacks will still work fine --- and fast:  No unnecessary
+`Promise`s are created if you supply a callback.
 
 The wrappers are generated automatically by a script, with a table to
 handle exceptions and odd cases.  See below for more details.
@@ -20,10 +22,12 @@ npm install pn
 ```
 var fs = require('pn/fs');
 fs.writeFile('foo', 'bar', 'utf-8').then(function() { console.log('done'); });
+// But you can use callbacks, too -- existing code won't break.
+fs.writeFile('foo', 'bat', 'utf-8', function(err) { console.log('yay'); });
 ```
 
-This library uses only the node native promises, and thus works with
-node >= 0.11.
+This library uses only node native promises (ie `global.Promise`), and thus
+works with node >= 0.11.
 
 You can use the [`es6-shim`](https://www.npmjs.org/package/promised-node)
 to add ES6 Promises to earlier versions of node, for example:

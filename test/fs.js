@@ -7,7 +7,37 @@ var path = require('../path');
 var TESTFILE = '/tmp/hello';
 
 describe('fs module', function() {
-    it('write/read/unlink', function() {
+    it('write/read/unlink (callbacks)', function(done) {
+        fs.exists(TESTFILE, function(exists) {
+            if (exists) {
+                return done("Pre-existing file "+TESTFILE+"; aborting test.");
+            }
+            fs.writeFile(TESTFILE, 'hello', 'utf-8', function(err) {
+                if (err) { return done(err); }
+                fs.exists(TESTFILE, function(exists) {
+                    if (!exists) {
+                        return done(TESTFILE+" not found");
+                    }
+                    fs.readFile(TESTFILE, 'utf-8', function(err, contents) {
+                        if (err) { return done(err); }
+                        if (contents !== 'hello') {
+                            return done("File contents are not right");
+                        }
+                        fs.unlink(TESTFILE, function(err) {
+                            if (err) { return done(err); }
+                            fs.exists(TESTFILE, function(exists) {
+                                if (exists) {
+                                    return done("unlink didn't work");
+                                }
+                                done(/*success!*/);
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+    it('write/read/unlink (promises)', function() {
         return fs.exists(TESTFILE).then(function(exists) {
             assert.equal(!!exists, false,
                          "Pre-existing file "+TESTFILE+"; aborting test.");
