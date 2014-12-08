@@ -2,7 +2,6 @@ var promisify = require("./_promisify.js");
 var bind = function(c, f) { return f && f.bind(c); };
 Object.defineProperties(module.exports, {
   EventEmitter: { enumerable: true, value: process.EventEmitter },
-  //_currentTickHandler: // skipping
   //_debugEnd: // skipping
   //_debugPause: // skipping
   //_debugProcess: // skipping
@@ -14,13 +13,11 @@ Object.defineProperties(module.exports, {
   //_kill: // skipping
   //_maxListeners: // skipping
   //_needImmediateCallback: // skipping
-  //_needTickCallback: // skipping
-  //_nextDomainTick: // skipping
+  //_rawDebug: // skipping
+  //_startProfilerIdleNotifier: // skipping
+  //_stopProfilerIdleNotifier: // skipping
   //_tickCallback: // skipping
   //_tickDomainCallback: // skipping
-  //_tickFromSpinner: // skipping
-  //_tickInfoBox: // skipping
-  //_usingDomains: // skipping
   abort: { enumerable: true, value: bind(process, process.abort) },
   addListener: { enumerable: true, value: bind(process, process.addListener) },
   arch: { enumerable: true, get: function() { return process.arch; }, set: function(v) { process.arch = v; } },
@@ -45,7 +42,6 @@ Object.defineProperties(module.exports, {
   initgroups: { enumerable: true, value: bind(process, process.initgroups) },
   kill: { enumerable: true, value: bind(process, process.kill) },
   mainModule: { enumerable: true, get: function() { return process.mainModule; }, set: function(v) { process.mainModule = v; } },
-  maxTickDepth: { enumerable: true, get: function() { return process.maxTickDepth; }, set: function(v) { process.maxTickDepth = v; } },
   memoryUsage: { enumerable: true, value: bind(process, process.memoryUsage) },
   moduleLoadList: { enumerable: true, get: function() { return process.moduleLoadList; }, set: function(v) { process.moduleLoadList = v; } },
   nextTick: { enumerable: true, value: promisify(process, process.nextTick, 0) },

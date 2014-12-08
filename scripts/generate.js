@@ -40,9 +40,11 @@ var packages = {
         exists: { promisify: true, noError: true },
         mkdir: { args: 1 },
         open: { args: 2 },
+        read: { cb: ['read', 'data'] },
         readFile: { args: 1 },
         realpath: { args: 1 },
         symlink: { args: 2 },
+        write: { cb: ['written', 'data'] },
         writeFile: { args: 2 },
     },
     http: {

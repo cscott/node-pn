@@ -5,11 +5,12 @@ var deferred = function(options) {
     var resolve, reject, p = new Promise(function(_resolve, _reject) {
         resolve = _resolve; reject = _reject;
     });
+    var pattern = (options && options.pattern);
     var noError = (options && options.noError);
-    var cb = (options && options.pattern) ? function(err) {
+    var cb = pattern ? function(err) {
         if (err && !noError) { return reject(err); }
         var result = {}, i, offset = noError ? 0 : 1;
-        for (i=0; i<pattern.length; i++) {
+        for (i = 0; i < pattern.length; i++) {
             result[pattern[i]] = arguments[i+offset];
         }
         resolve(result);
