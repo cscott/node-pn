@@ -54,6 +54,8 @@ existing node code.*
 
 Here are some other packages with similar aims:
 * [`promised-node`](https://www.npmjs.org/package/promised-node)
+* [`then-fs`](https://www.npmjs.org/package/then-fs)
+* [`final-fs`](https://www.npmjs.org/package/final-fs)
 
 ## License
 

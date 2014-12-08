@@ -4,6 +4,7 @@ var path = require('path');
 
 // These are the node packages we are going to wrap.
 var packages = {
+    assert: { skip: true },
     buffer: { skip: true },
     child_process: {
         exec: { promisify: true, returnsObject: true, args: 1, cb:['stdout','stderr'] },
@@ -36,6 +37,7 @@ var packages = {
     },
     fs: {
         appendFile: { args: 2 },
+        exists: { promisify: true, noError: true },
         mkdir: { args: 1 },
         open: { args: 2 },
         readFile: { args: 1 },
@@ -168,18 +170,25 @@ sorted(Object.keys(packages)).forEach(function(pkgname) {
                 return;
             }
             // OK, this is very likely an async function!
-            var pfunc = 'promisify';
-            if (opts.returnsObject) {
-                pfunc += '.returnsObject';
-            } else if (opts.syncIfNoCallback && false /* not needed? */) {
-                pfunc += '.syncIfNoCallback';
-            }
             // number of mandatory options (may be additional optional args)
             var nargs = opts.args!==undefined ? opts.args :
                 (typeof(m[prop+'Sync']) === 'function') ?
                 m[prop+'Sync'].length : m[prop].length;
-            var optPattern = opts.cb ? (', '+JSON.stringify(opts.cb)) : '';
-            emit(out+'value: '+pfunc+'('+pkgname+', '+pkgname+'.'+prop+', '+nargs+optPattern+') },');
+            var options = {}, emitOptions = false;
+            if (opts.cb) {
+                options.pattern = opts.cb;
+                emitOptions = true;
+            }
+            if (opts.noError) {
+                options.noError = true;
+                emitOptions = true;
+            }
+            if (opts.returnsObject) {
+                options.returnsObject = true;
+                emitOptions = true;
+            }
+            var optString = emitOptions ? ', '+JSON.stringify(options) : '';
+            emit(out+'value: promisify('+pkgname+', '+pkgname+'.'+prop+', '+nargs+optString+') },');
             if (opts.syncIfNoCallback) {
                 emit(out.replace(/:/,"Sync:")+'value: '+pkgname+'.'+prop+'.bind('+pkgname+') },');
             }

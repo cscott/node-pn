@@ -7,8 +7,8 @@ Object.defineProperties(module.exports, {
   SLAB_BUFFER_SIZE: { enumerable: true, value: tls.SLAB_BUFFER_SIZE },
   Server: { enumerable: true, value: tls.Server },
   checkServerIdentity: { enumerable: true, value: bind(tls, tls.checkServerIdentity) },
-  connect: { enumerable: true, value: promisify.returnsObject(tls, tls.connect, 1) },
+  connect: { enumerable: true, value: promisify(tls, tls.connect, 1, {"returnsObject":true}) },
   createSecurePair: { enumerable: true, value: bind(tls, tls.createSecurePair) },
-  createServer: { enumerable: true, value: promisify.returnsObject(tls, tls.createServer, 1) },
+  createServer: { enumerable: true, value: promisify(tls, tls.createServer, 1, {"returnsObject":true}) },
   getCiphers: { enumerable: true, value: bind(tls, tls.getCiphers) },
 });

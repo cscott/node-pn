@@ -19,7 +19,7 @@ Object.defineProperties(module.exports, {
   closeSync: { enumerable: true, value: bind(fs, fs.closeSync) },
   createReadStream: { enumerable: true, value: bind(fs, fs.createReadStream) },
   createWriteStream: { enumerable: true, value: bind(fs, fs.createWriteStream) },
-  exists: { enumerable: true, value: promisify(fs, fs.exists, 1) },
+  exists: { enumerable: true, value: promisify(fs, fs.exists, 1, {"noError":true}) },
   existsSync: { enumerable: true, value: bind(fs, fs.existsSync) },
   fchmod: { enumerable: true, value: promisify(fs, fs.fchmod, 2) },
   fchmodSync: { enumerable: true, value: bind(fs, fs.fchmodSync) },

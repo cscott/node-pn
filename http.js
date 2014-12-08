@@ -13,8 +13,8 @@ Object.defineProperties(module.exports, {
   //_connectionListener: // skipping
   createClient: { enumerable: true, value: bind(http, http.createClient) },
   createServer: { enumerable: true, value: bind(http, http.createServer) },
-  get: { enumerable: true, value: promisify.returnsObject(http, http.get, 1) },
+  get: { enumerable: true, value: promisify(http, http.get, 1, {"returnsObject":true}) },
   globalAgent: { enumerable: true, get: function() { return http.globalAgent; }, set: function(v) { http.globalAgent = v; } },
   parsers: { enumerable: true, get: function() { return http.parsers; }, set: function(v) { http.parsers = v; } },
-  request: { enumerable: true, value: promisify.returnsObject(http, http.request, 1) },
+  request: { enumerable: true, value: promisify(http, http.request, 1, {"returnsObject":true}) },
 });
