@@ -1,7 +1,10 @@
 # pn
+[![NPM][NPM1]][NPM2]
+
+[![Build Status][1]][2]
 
 The `pn` library gives you the Promise-using node standard library
-you've always dreamed of.
+you've always dreamed of.  Think "Promised Node" when saying it.
 
 Just about every node standard library method that takes a callback will now
 return a `Promise` iff no callback is supplied.
@@ -39,6 +42,14 @@ In particular, the `Promise#done` method is very useful when
 debugging, at least until v8's native Promise debugging
 capabilities are completed.
 
+## Exceptions and odd cases
+
+* The `crypto` package contains a pair of functions which were
+synchronous if no callback was supplied.  They are now always
+async; there is a `*Sync` version of the function if you want
+synchronous computation.  *This is backwards incompatible with
+existing node code.*
+
 ## Related packages
 
 Here are some other packages with similar aims:
@@ -65,3 +76,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+[NPM1]: https://nodei.co/npm/pn.png
+[NPM2]: https://nodei.co/npm/pn/
+
+[1]: https://travis-ci.org/cscott/pn.svg
+[2]: https://travis-ci.org/cscott/pn
