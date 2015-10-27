@@ -4,7 +4,7 @@ var bind = function(c, f) { return f && f.bind(c); };
 Object.defineProperties(module.exports, {
   ADDRCONFIG: { enumerable: true, value: dns.ADDRCONFIG },
   ADDRGETNETWORKPARAMS: { enumerable: true, value: dns.ADDRGETNETWORKPARAMS },
-  ADNAME: { enumerable: true, value: dns.ADNAME },
+  //ADNAME: // skipping
   BADFAMILY: { enumerable: true, value: dns.BADFAMILY },
   BADFLAGS: { enumerable: true, value: dns.BADFLAGS },
   BADHINTS: { enumerable: true, value: dns.BADHINTS },

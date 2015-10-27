@@ -20,6 +20,7 @@ var packages = {
         pseudoRandomBytes: { promisify: true, syncIfNoCallback: true, args: 1 },
     },
     dns: {
+        ADNAME: { skip: true },
         lookup: { promisify: true, args: 1 },
         lookupService: { promisify: true, args: 2, cb:['hostname','service'] },
         resolve: { promisify: true, args: 1 },
