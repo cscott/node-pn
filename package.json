@@ -1,6 +1,6 @@
 {
   "name": "pn",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Promisify the node standard library.",
   "scripts": {
     "generate": "scripts/generate.js",
