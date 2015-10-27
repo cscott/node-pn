@@ -1,7 +1,9 @@
 // freeze Array#slice, just in case of funny business later.
 var _slice = Array.prototype.slice;
+var getPromise = require('./_promise.js');
 // deferred gets its own scope to prevent inadvertent capture in the closure
 var deferred = function(options) {
+    var Promise = getPromise();
     var resolve, reject, p = new Promise(function(_resolve, _reject) {
         resolve = _resolve; reject = _reject;
     });

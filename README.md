@@ -26,10 +26,11 @@ fs.writeFile('foo', 'bar', 'utf-8').then(function() { console.log('done'); });
 fs.writeFile('foo', 'bat', 'utf-8', function(err) { console.log('yay'); });
 ```
 
-This library uses only node native promises (ie `global.Promise`), and thus
-works with node >= 0.11.
+This library uses node native promises (ie `global.Promise`) by
+default, and thus works with node >= 0.11.
 
-You can use the [`es6-shim`](https://www.npmjs.org/package/promised-node)
+You can use [`core-js`](https://www.npmjs.org/package/core-js) or
+[`es6-shim`](https://www.npmjs.org/package/es6-shim)
 to add ES6 Promises to earlier versions of node, for example:
 ```
 require('es6-shim');
@@ -46,6 +47,14 @@ fun.
 In particular, the `Promise#done` method is very useful when
 debugging, at least until v8's native Promise debugging
 capabilities are completed.
+
+## Custom Promise types
+
+You can also specify a custom `Promise` type to use, as follows:
+```
+var MyPromise = require('prfun');  // Use prfun's Promises, for example.
+require('pn/_promise')(MyPromise); // This only needs to be done once.
+```
 
 ## Exceptions and odd cases
 
