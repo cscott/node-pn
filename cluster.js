@@ -6,6 +6,7 @@ Object.defineProperties(module.exports, {
   SCHED_RR: { enumerable: true, value: cluster.SCHED_RR },
   Worker: { enumerable: true, value: cluster.Worker },
   //_events: // skipping
+  //_eventsCount: // skipping
   //_maxListeners: // skipping
   disconnect: { enumerable: true, value: promisify(cluster, cluster.disconnect, 0) },
   domain: { enumerable: true, get: function() { return cluster.domain; }, set: function(v) { cluster.domain = v; } },

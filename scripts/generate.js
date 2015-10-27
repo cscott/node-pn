@@ -37,15 +37,16 @@ var packages = {
         // XXX Domain#bind and Domain#intercept should be promisified
     },
     fs: {
+        access: { args: 1 },
         appendFile: { args: 2 },
         exists: { promisify: true, noError: true },
         mkdir: { args: 1 },
         open: { args: 2 },
-        read: { cb: ['read', 'data'] },
+        read: { cb: ['read', 'buffer'] },
         readFile: { args: 1 },
         realpath: { args: 1 },
         symlink: { args: 2 },
-        write: { cb: ['written', 'data'] },
+        write: { cb: ['written', 'buffer'] },
         writeFile: { args: 2 },
     },
     http: {

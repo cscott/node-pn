@@ -3,6 +3,7 @@ var promisify = require("./_promisify.js");
 var bind = function(c, f) { return f && f.bind(c); };
 Object.defineProperties(module.exports, {
   //_errnoException: // skipping
+  //_exceptionWithHostPort: // skipping
   //_extend: // skipping
   debug: { enumerable: true, value: bind(util, util.debug) },
   debuglog: { enumerable: true, value: bind(util, util.debuglog) },

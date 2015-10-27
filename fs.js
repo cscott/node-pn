@@ -2,13 +2,18 @@ var fs = require("fs");
 var promisify = require("./_promisify.js");
 var bind = function(c, f) { return f && f.bind(c); };
 Object.defineProperties(module.exports, {
+  F_OK: { enumerable: true, value: fs.F_OK },
   FileReadStream: { enumerable: true, value: fs.FileReadStream },
   FileWriteStream: { enumerable: true, value: fs.FileWriteStream },
+  R_OK: { enumerable: true, value: fs.R_OK },
   ReadStream: { enumerable: true, value: fs.ReadStream },
   Stats: { enumerable: true, value: fs.Stats },
-  SyncWriteStream: { enumerable: true, value: fs.SyncWriteStream },
+  W_OK: { enumerable: true, value: fs.W_OK },
   WriteStream: { enumerable: true, value: fs.WriteStream },
+  X_OK: { enumerable: true, value: fs.X_OK },
   //_toUnixTimestamp: // skipping
+  access: { enumerable: true, value: promisify(fs, fs.access, 1) },
+  accessSync: { enumerable: true, value: bind(fs, fs.accessSync) },
   appendFile: { enumerable: true, value: promisify(fs, fs.appendFile, 2) },
   appendFileSync: { enumerable: true, value: bind(fs, fs.appendFileSync) },
   chmod: { enumerable: true, value: promisify(fs, fs.chmod, 2) },
@@ -43,7 +48,7 @@ Object.defineProperties(module.exports, {
   mkdirSync: { enumerable: true, value: bind(fs, fs.mkdirSync) },
   open: { enumerable: true, value: promisify(fs, fs.open, 2) },
   openSync: { enumerable: true, value: bind(fs, fs.openSync) },
-  read: { enumerable: true, value: promisify(fs, fs.read, 5) },
+  read: { enumerable: true, value: promisify(fs, fs.read, 5, {"pattern":["read","buffer"]}) },
   readFile: { enumerable: true, value: promisify(fs, fs.readFile, 1) },
   readFileSync: { enumerable: true, value: bind(fs, fs.readFileSync) },
   readSync: { enumerable: true, value: bind(fs, fs.readSync) },
@@ -70,7 +75,7 @@ Object.defineProperties(module.exports, {
   utimesSync: { enumerable: true, value: bind(fs, fs.utimesSync) },
   watch: { enumerable: true, value: bind(fs, fs.watch) },
   watchFile: { enumerable: true, value: bind(fs, fs.watchFile) },
-  write: { enumerable: true, value: promisify(fs, fs.write, 5) },
+  write: { enumerable: true, value: promisify(fs, fs.write, 5, {"pattern":["written","buffer"]}) },
   writeFile: { enumerable: true, value: promisify(fs, fs.writeFile, 2) },
   writeFileSync: { enumerable: true, value: bind(fs, fs.writeFileSync) },
   writeSync: { enumerable: true, value: bind(fs, fs.writeSync) },

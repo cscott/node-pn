@@ -6,11 +6,14 @@ Object.defineProperties(module.exports, {
   //_debugPause: // skipping
   //_debugProcess: // skipping
   //_events: // skipping
+  //_eventsCount: // skipping
   //_exiting: // skipping
   //_fatalException: // skipping
   //_getActiveHandles: // skipping
   //_getActiveRequests: // skipping
   //_kill: // skipping
+  //_linkedBinding: // skipping
+  //_makeCallbackAbortOnUncaught: // skipping
   //_maxListeners: // skipping
   //_needImmediateCallback: // skipping
   //_rawDebug: // skipping
@@ -19,7 +22,6 @@ Object.defineProperties(module.exports, {
   //_tickCallback: // skipping
   //_tickDomainCallback: // skipping
   abort: { enumerable: true, value: bind(process, process.abort) },
-  addListener: { enumerable: true, value: bind(process, process.addListener) },
   arch: { enumerable: true, get: function() { return process.arch; }, set: function(v) { process.arch = v; } },
   argv: { enumerable: true, get: function() { return process.argv; }, set: function(v) { process.argv = v; } },
   assert: { enumerable: true, value: bind(process, process.assert) },
@@ -35,6 +37,8 @@ Object.defineProperties(module.exports, {
   execPath: { enumerable: true, get: function() { return process.execPath; }, set: function(v) { process.execPath = v; } },
   exit: { enumerable: true, value: bind(process, process.exit) },
   features: { enumerable: true, get: function() { return process.features; }, set: function(v) { process.features = v; } },
+  getegid: { enumerable: true, value: bind(process, process.getegid) },
+  geteuid: { enumerable: true, value: bind(process, process.geteuid) },
   getgid: { enumerable: true, value: bind(process, process.getgid) },
   getgroups: { enumerable: true, value: bind(process, process.getgroups) },
   getuid: { enumerable: true, value: bind(process, process.getuid) },
@@ -45,12 +49,13 @@ Object.defineProperties(module.exports, {
   memoryUsage: { enumerable: true, value: bind(process, process.memoryUsage) },
   moduleLoadList: { enumerable: true, get: function() { return process.moduleLoadList; }, set: function(v) { process.moduleLoadList = v; } },
   nextTick: { enumerable: true, value: promisify(process, process.nextTick, 0) },
-  on: { enumerable: true, value: bind(process, process.on) },
   openStdin: { enumerable: true, value: bind(process, process.openStdin) },
   pid: { enumerable: true, get: function() { return process.pid; }, set: function(v) { process.pid = v; } },
   platform: { enumerable: true, get: function() { return process.platform; }, set: function(v) { process.platform = v; } },
   reallyExit: { enumerable: true, value: bind(process, process.reallyExit) },
-  removeListener: { enumerable: true, value: bind(process, process.removeListener) },
+  release: { enumerable: true, get: function() { return process.release; }, set: function(v) { process.release = v; } },
+  setegid: { enumerable: true, value: bind(process, process.setegid) },
+  seteuid: { enumerable: true, value: bind(process, process.seteuid) },
   setgid: { enumerable: true, value: bind(process, process.setgid) },
   setgroups: { enumerable: true, value: bind(process, process.setgroups) },
   setuid: { enumerable: true, value: bind(process, process.setuid) },
