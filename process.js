@@ -10,15 +10,14 @@ Object.defineProperties(module.exports, {
   //_fatalException: // skipping
   //_getActiveHandles: // skipping
   //_getActiveRequests: // skipping
+  //_immediateCallback: // skipping
   //_kill: // skipping
   //_linkedBinding: // skipping
   //_maxListeners: // skipping
-  //_needImmediateCallback: // skipping
   //_rawDebug: // skipping
   //_startProfilerIdleNotifier: // skipping
   //_stopProfilerIdleNotifier: // skipping
   //_tickCallback: // skipping
-  //_tickDomainCallback: // skipping
   abort: { enumerable: true, value: bind(process, process.abort) },
   arch: { enumerable: true, get: function() { return process.arch; }, set: function(v) { process.arch = v; } },
   argv: { enumerable: true, get: function() { return process.argv; }, set: function(v) { process.argv = v; } },
@@ -43,6 +42,7 @@ Object.defineProperties(module.exports, {
   getgid: { enumerable: true, value: bind(process, process.getgid) },
   getgroups: { enumerable: true, value: bind(process, process.getgroups) },
   getuid: { enumerable: true, value: bind(process, process.getuid) },
+  hasUncaughtExceptionCaptureCallback: { enumerable: true, value: bind(process, process.hasUncaughtExceptionCaptureCallback) },
   hrtime: { enumerable: true, value: bind(process, process.hrtime) },
   initgroups: { enumerable: true, value: bind(process, process.initgroups) },
   kill: { enumerable: true, value: bind(process, process.kill) },
@@ -53,8 +53,10 @@ Object.defineProperties(module.exports, {
   openStdin: { enumerable: true, value: bind(process, process.openStdin) },
   pid: { enumerable: true, get: function() { return process.pid; }, set: function(v) { process.pid = v; } },
   platform: { enumerable: true, get: function() { return process.platform; }, set: function(v) { process.platform = v; } },
+  ppid: { enumerable: true, get: function() { return process.ppid; }, set: function(v) { process.ppid = v; } },
   reallyExit: { enumerable: true, value: bind(process, process.reallyExit) },
   release: { enumerable: true, get: function() { return process.release; }, set: function(v) { process.release = v; } },
+  setUncaughtExceptionCaptureCallback: { enumerable: true, value: bind(process, process.setUncaughtExceptionCaptureCallback) },
   setegid: { enumerable: true, value: bind(process, process.setegid) },
   seteuid: { enumerable: true, value: bind(process, process.seteuid) },
   setgid: { enumerable: true, value: bind(process, process.setgid) },

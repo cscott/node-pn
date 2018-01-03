@@ -6,7 +6,7 @@ Object.defineProperties(module.exports, {
   Socket: { enumerable: true, value: net.Socket },
   Stream: { enumerable: true, value: net.Stream },
   //_createServerHandle: // skipping
-  //_normalizeConnectArgs: // skipping
+  //_normalizeArgs: // skipping
   //_setSimultaneousAccepts: // skipping
   connect: { enumerable: true, value: bind(net, net.connect) },
   createConnection: { enumerable: true, value: bind(net, net.createConnection) },

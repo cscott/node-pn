@@ -23,6 +23,8 @@ Object.defineProperties(module.exports, {
   close: { enumerable: true, value: promisify(fs, fs.close, 1) },
   closeSync: { enumerable: true, value: bind(fs, fs.closeSync) },
   constants: { enumerable: true, get: function() { return fs.constants; }, set: function(v) { fs.constants = v; } },
+  copyFile: { enumerable: true, value: promisify(fs, fs.copyFile, 2) },
+  copyFileSync: { enumerable: true, value: bind(fs, fs.copyFileSync) },
   createReadStream: { enumerable: true, value: bind(fs, fs.createReadStream) },
   createWriteStream: { enumerable: true, value: bind(fs, fs.createWriteStream) },
   exists: { enumerable: true, value: promisify(fs, fs.exists, 1, {"noError":true}) },

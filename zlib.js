@@ -2,12 +2,19 @@ var zlib = require("zlib");
 var promisify = require("./_promisify.js");
 var bind = function(c, f) { return f && f.bind(c); };
 Object.defineProperties(module.exports, {
+  DEFLATE: { enumerable: true, value: zlib.DEFLATE },
+  DEFLATERAW: { enumerable: true, value: zlib.DEFLATERAW },
   Deflate: { enumerable: true, value: zlib.Deflate },
   DeflateRaw: { enumerable: true, value: zlib.DeflateRaw },
+  GUNZIP: { enumerable: true, value: zlib.GUNZIP },
+  GZIP: { enumerable: true, value: zlib.GZIP },
   Gunzip: { enumerable: true, value: zlib.Gunzip },
   Gzip: { enumerable: true, value: zlib.Gzip },
+  INFLATE: { enumerable: true, value: zlib.INFLATE },
+  INFLATERAW: { enumerable: true, value: zlib.INFLATERAW },
   Inflate: { enumerable: true, value: zlib.Inflate },
   InflateRaw: { enumerable: true, value: zlib.InflateRaw },
+  UNZIP: { enumerable: true, value: zlib.UNZIP },
   Unzip: { enumerable: true, value: zlib.Unzip },
   ZLIB_VERNUM: { enumerable: true, value: zlib.ZLIB_VERNUM },
   ZLIB_VERSION: { enumerable: true, value: zlib.ZLIB_VERSION },
@@ -49,6 +56,7 @@ Object.defineProperties(module.exports, {
   Z_VERSION_ERROR: { enumerable: true, value: zlib.Z_VERSION_ERROR },
   Zlib: { enumerable: true, value: zlib.Zlib },
   codes: { enumerable: true, value: zlib.codes },
+  constants: { enumerable: true, get: function() { return zlib.constants; }, set: function(v) { zlib.constants = v; } },
   createDeflate: { enumerable: true, value: bind(zlib, zlib.createDeflate) },
   createDeflateRaw: { enumerable: true, value: bind(zlib, zlib.createDeflateRaw) },
   createGunzip: { enumerable: true, value: bind(zlib, zlib.createGunzip) },

@@ -5,6 +5,7 @@ var path = require('path');
 // These are the node packages we are going to wrap.
 var packages = {
     assert: { skip: true },
+    async_hooks: { optional: true, skip: true },
     buffer: { skip: true },
     child_process: {
         exec: { promisify: true, returnsObject: true, args: 1, cb:['stdout','stderr'] },
@@ -18,31 +19,39 @@ var packages = {
     console: { skip: true },
     crypto: {
         DEFAULT_ENCODING: { constant: false },
-        randomBytes: { promisify: true, syncIfNoCallback: true, args: 1 },
         pseudoRandomBytes: { promisify: true, syncIfNoCallback: true, args: 1 },
+        randomBytes: { promisify: true, syncIfNoCallback: true, args: 1 },
+        randomFill: { args: 1 },
     },
     dns: {
+        // XXX: Resolver could be wrapped...
         ADNAME: { skip: true },
         lookup: { promisify: true, args: 1 },
         lookupService: { promisify: true, args: 2, cb:['hostname','service'] },
         resolve: { promisify: true, args: 1 },
         resolve4: { promisify: true, args: 1 },
         resolve6: { promisify: true, args: 1 },
-        resolveMx: { promisify: true, args: 1 },
-        resolveTxt: { promisify: true, args: 1 },
-        resolveSrv: { promisify: true, args: 1 },
-        resolveNs: { promisify: true, args: 1 },
+        resolveAny: { promisify: true, args: 1 },
         resolveCname: { promisify: true, args: 1 },
+        resolveMx: { promisify: true, args: 1 },
+        resolveNaptr: { promisify: true, args: 1 },
+        resolveNs: { promisify: true, args: 1 },
+        resolvePtr: { promisify: true, args: 1 },
+        resolveSoa: { promisify: true, args: 1 },
+        resolveSrv: { promisify: true, args: 1 },
+        resolveTxt: { promisify: true, args: 1 },
         reverse: { promisify: true, args: 1 },
     },
     domain: {
         // XXX Domain#bind and Domain#intercept should be promisified
     },
     events: {
+        skip: true,
     },
     fs: {
         access: { args: 1 },
         appendFile: { args: 2 },
+        copyFile: { args: 2 },
         exists: { promisify: true, noError: true },
         mkdir: { args: 1 },
         mkdtemp: { args: 1 },
@@ -66,11 +75,18 @@ var packages = {
         request: { promisify: true, returnsObject: true, args: 1 },
         get: { promisify: true, returnsObject: true, args: 1 },
     },
+    http2: {
+        optional: true,
+    },
     https: {
         // XXX Server#listen, Server#close, and Server#setTimeout
         // should be promisified
         request: { promisify: true, returnsObject: true, args: 1 },
         get: { promisify: true, returnsObject: true, args: 1 },
+    },
+    inspector: {
+        optional: true,
+        skip: true,
     },
     net: {
         // XXX Server#listen, Server#close, Server#getConnections
@@ -79,10 +95,11 @@ var packages = {
     },
     os: { skip: true },
     path: { skip: true },
+    perf_hooks: { optional: true, skip: true },
     process: {
         nextTick: { promisify: true, args: 0 }
     },
-    punycode: { skip: true },
+    punycode: { optional: true, skip: true },
     querystring: { skip: true },
     readline: {
         // XXX Interface#question should be promisified
@@ -95,6 +112,10 @@ var packages = {
         // what about _read/_write/_transform/_flush for implementers?
     },
     string_decoder: { skip: true },
+    timers: {
+        setImmediate: { promisify: true, callbackIsFirstArg: true },
+        setTimeout: { promisify: true, callbackIsFirstArg: true },
+    },
     tls: {
         connect: { promisify: true, returnsObject: true, args: 1 },
         createServer: { promisify: true, returnsObject: true, args: 1 },
@@ -112,7 +133,7 @@ var packages = {
     util: {
         pump: { promisify: true, args: 2 }
     },
-    v8: { optional: true },
+    v8: { optional: true, skip: true },
     vm: { skip: true },
     zlib: {
         codes: { constant: true },
@@ -202,6 +223,11 @@ sorted(Object.keys(packages)).forEach(function(pkgname) {
             }
             if (opts.returnsObject) {
                 options.returnsObject = true;
+                emitOptions = true;
+            }
+            if (opts.callbackIsFirstArg) {
+                options.callbackIsFirstArg = true;
+                nargs = 0;
                 emitOptions = true;
             }
             var optString = emitOptions ? ', '+JSON.stringify(options) : '';
