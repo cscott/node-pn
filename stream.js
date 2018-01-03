@@ -8,5 +8,7 @@ Object.defineProperties(module.exports, {
   Stream: { enumerable: true, value: stream.Stream },
   Transform: { enumerable: true, value: stream.Transform },
   Writable: { enumerable: true, value: stream.Writable },
+  //_isUint8Array: // skipping
+  //_uint8ArrayToBuffer: // skipping
   //super_: // skipping
 });
