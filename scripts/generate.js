@@ -9,6 +9,8 @@ var packages = {
     child_process: {
         exec: { promisify: true, returnsObject: true, args: 1, cb:['stdout','stderr'] },
         execFile: { promisify: true, returnsObject: true, args: 1, cb:['stdout','stderr'] },
+        fork: { promisify: false },
+        spawn: { promisify: false },
     },
     cluster: {
         disconnect: { promisify: true, args: 0 },
@@ -180,7 +182,7 @@ sorted(Object.keys(packages)).forEach(function(pkgname) {
             // Is this a async function?
             var isAsync = (typeof(m[prop+'Sync']) === 'function');
             if (opts.promisify) { isAsync = true; }
-            if (!isAsync) {
+            if (!isAsync || opts.promisify === false) {
                 emit(out+'value: bind('+pkgname+', '+pkgname+'.'+prop+') },');
                 return;
             }

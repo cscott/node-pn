@@ -9,6 +9,6 @@ Object.defineProperties(module.exports, {
   execFileSync: { enumerable: true, value: bind(child_process, child_process.execFileSync) },
   execSync: { enumerable: true, value: bind(child_process, child_process.execSync) },
   fork: { enumerable: true, value: bind(child_process, child_process.fork) },
-  spawn: { enumerable: true, value: promisify(child_process, child_process.spawn, 0) },
+  spawn: { enumerable: true, value: bind(child_process, child_process.spawn) },
   spawnSync: { enumerable: true, value: bind(child_process, child_process.spawnSync) },
 });
