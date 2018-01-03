@@ -2,6 +2,11 @@
 var _slice = Array.prototype.slice;
 var getPromise = require('./_promise.js');
 
+var util_promisify_custom = null;
+try {
+    util_promisify_custom = require('util').promisify.custom;
+} catch (e) { /* ignore, pre-8.0.0 */ }
+
 // deferred gets its own scope to prevent inadvertent capture in the closure
 var deferred = function(options) {
     var Promise = getPromise();
@@ -23,6 +28,11 @@ var deferred = function(options) {
     return { promise: p, callback: cb };
 };
 var promisify = module.exports = function(context, func, mandatoryArgs, options) {
+    // node 8.0.0 allows custom 'promisified' functions
+    if (util_promisify_custom && func &&
+        typeof(func[util_promisify_custom]) === 'function') {
+        return func[util_promisify_custom].bind(context);
+    }
     if (options && options.callbackIsFirstArg) {
         // duplicate some code here so we don't have to process this unusual
         // situation at runtime in the common case.
