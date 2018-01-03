@@ -36,13 +36,18 @@ var packages = {
     domain: {
         // XXX Domain#bind and Domain#intercept should be promisified
     },
+    events: {
+    },
     fs: {
         access: { args: 1 },
         appendFile: { args: 2 },
         exists: { promisify: true, noError: true },
         mkdir: { args: 1 },
+        mkdtemp: { args: 1 },
         open: { args: 2 },
         read: { cb: ['read', 'buffer'] },
+        readdir: { args: 1 },
+        readlink: { args: 1 },
         readFile: { args: 1 },
         realpath: { args: 1 },
         symlink: { args: 2 },
@@ -105,6 +110,7 @@ var packages = {
     util: {
         pump: { promisify: true, args: 2 }
     },
+    v8: { optional: true },
     vm: { skip: true },
     zlib: {
         codes: { constant: true },
@@ -125,16 +131,21 @@ var sorted = function(arr) {
 }
 
 sorted(Object.keys(packages)).forEach(function(pkgname) {
+    var pkgopts = packages[pkgname] || {};
     var script = [];
     var emit = function(l) { script.push(l); };
     var m;
     if (pkgname==='process') {
         m = process;
+    } else if (pkgopts.optional) {
+        // Package is not present in older versions of node.
+        emit('var '+pkgname+' = {};');
+        emit('try { '+pkgname+' = require("'+pkgname+'"); } catch (e) { }');
+        m = require(pkgname);
     } else {
         emit('var '+pkgname+' = require("'+pkgname+'");');
         m = require(pkgname);
     }
-    var pkgopts = packages[pkgname] || {};
     if (pkgopts.skip) {
         emit('module.exports = '+pkgname+';');
     } else {

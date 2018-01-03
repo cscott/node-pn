@@ -4,10 +4,10 @@ var bind = function(c, f) { return f && f.bind(c); };
 Object.defineProperties(module.exports, {
   ADDRCONFIG: { enumerable: true, value: dns.ADDRCONFIG },
   ADDRGETNETWORKPARAMS: { enumerable: true, value: dns.ADDRGETNETWORKPARAMS },
-  //ADNAME: // skipping
   BADFAMILY: { enumerable: true, value: dns.BADFAMILY },
   BADFLAGS: { enumerable: true, value: dns.BADFLAGS },
   BADHINTS: { enumerable: true, value: dns.BADHINTS },
+  BADNAME: { enumerable: true, value: dns.BADNAME },
   BADQUERY: { enumerable: true, value: dns.BADQUERY },
   BADRESP: { enumerable: true, value: dns.BADRESP },
   BADSTR: { enumerable: true, value: dns.BADSTR },
@@ -38,6 +38,7 @@ Object.defineProperties(module.exports, {
   resolveMx: { enumerable: true, value: promisify(dns, dns.resolveMx, 1) },
   resolveNaptr: { enumerable: true, value: bind(dns, dns.resolveNaptr) },
   resolveNs: { enumerable: true, value: promisify(dns, dns.resolveNs, 1) },
+  resolvePtr: { enumerable: true, value: bind(dns, dns.resolvePtr) },
   resolveSoa: { enumerable: true, value: bind(dns, dns.resolveSoa) },
   resolveSrv: { enumerable: true, value: promisify(dns, dns.resolveSrv, 1) },
   resolveTxt: { enumerable: true, value: promisify(dns, dns.resolveTxt, 1) },

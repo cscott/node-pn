@@ -12,6 +12,7 @@ Object.defineProperties(module.exports, {
   TLSSocket: { enumerable: true, value: tls.TLSSocket },
   checkServerIdentity: { enumerable: true, value: bind(tls, tls.checkServerIdentity) },
   connect: { enumerable: true, value: promisify(tls, tls.connect, 1, {"returnsObject":true}) },
+  convertALPNProtocols: { enumerable: true, value: bind(tls, tls.convertALPNProtocols) },
   convertNPNProtocols: { enumerable: true, value: bind(tls, tls.convertNPNProtocols) },
   createSecureContext: { enumerable: true, value: bind(tls, tls.createSecureContext) },
   createSecurePair: { enumerable: true, value: bind(tls, tls.createSecurePair) },

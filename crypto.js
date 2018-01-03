@@ -16,6 +16,7 @@ Object.defineProperties(module.exports, {
   Sign: { enumerable: true, value: crypto.Sign },
   Verify: { enumerable: true, value: crypto.Verify },
   //_toBuf: // skipping
+  constants: { enumerable: true, get: function() { return crypto.constants; }, set: function(v) { crypto.constants = v; } },
   createCipher: { enumerable: true, value: bind(crypto, crypto.createCipher) },
   createCipheriv: { enumerable: true, value: bind(crypto, crypto.createCipheriv) },
   createCredentials: { enumerable: true, value: bind(crypto, crypto.createCredentials) },
@@ -45,4 +46,5 @@ Object.defineProperties(module.exports, {
   randomBytesSync: { enumerable: true, value: crypto.randomBytes.bind(crypto) },
   rng: { enumerable: true, value: bind(crypto, crypto.rng) },
   setEngine: { enumerable: true, value: bind(crypto, crypto.setEngine) },
+  timingSafeEqual: { enumerable: true, value: bind(crypto, crypto.timingSafeEqual) },
 });

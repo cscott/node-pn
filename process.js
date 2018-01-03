@@ -1,7 +1,6 @@
 var promisify = require("./_promisify.js");
 var bind = function(c, f) { return f && f.bind(c); };
 Object.defineProperties(module.exports, {
-  EventEmitter: { enumerable: true, value: process.EventEmitter },
   //_debugEnd: // skipping
   //_debugPause: // skipping
   //_debugProcess: // skipping
@@ -13,7 +12,6 @@ Object.defineProperties(module.exports, {
   //_getActiveRequests: // skipping
   //_kill: // skipping
   //_linkedBinding: // skipping
-  //_makeCallbackAbortOnUncaught: // skipping
   //_maxListeners: // skipping
   //_needImmediateCallback: // skipping
   //_rawDebug: // skipping
@@ -24,14 +22,17 @@ Object.defineProperties(module.exports, {
   abort: { enumerable: true, value: bind(process, process.abort) },
   arch: { enumerable: true, get: function() { return process.arch; }, set: function(v) { process.arch = v; } },
   argv: { enumerable: true, get: function() { return process.argv; }, set: function(v) { process.argv = v; } },
+  argv0: { enumerable: true, get: function() { return process.argv0; }, set: function(v) { process.argv0 = v; } },
   assert: { enumerable: true, value: bind(process, process.assert) },
   binding: { enumerable: true, value: bind(process, process.binding) },
   chdir: { enumerable: true, value: bind(process, process.chdir) },
   config: { enumerable: true, get: function() { return process.config; }, set: function(v) { process.config = v; } },
+  cpuUsage: { enumerable: true, value: bind(process, process.cpuUsage) },
   cwd: { enumerable: true, value: bind(process, process.cwd) },
   debugPort: { enumerable: true, get: function() { return process.debugPort; }, set: function(v) { process.debugPort = v; } },
   dlopen: { enumerable: true, value: bind(process, process.dlopen) },
   domain: { enumerable: true, get: function() { return process.domain; }, set: function(v) { process.domain = v; } },
+  emitWarning: { enumerable: true, value: bind(process, process.emitWarning) },
   env: { enumerable: true, get: function() { return process.env; }, set: function(v) { process.env = v; } },
   execArgv: { enumerable: true, get: function() { return process.execArgv; }, set: function(v) { process.execArgv = v; } },
   execPath: { enumerable: true, get: function() { return process.execPath; }, set: function(v) { process.execPath = v; } },
