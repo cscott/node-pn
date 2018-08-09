@@ -1,12 +1,14 @@
 var crypto = require("crypto");
 var promisify = require("./_promisify.js");
-var bind = function(c, f) { return f && f.bind(c); };
+var tls = require("tls");
+var bind = function (c, f) { return f && f.bind(c); };
+var isNodeBelowVersion10 = parseInt(process.version.split(".")[0]) < 10;
 Object.defineProperties(module.exports, {
   Certificate: { enumerable: true, value: crypto.Certificate },
   Cipher: { enumerable: true, value: crypto.Cipher },
   Cipheriv: { enumerable: true, value: crypto.Cipheriv },
-  Credentials: { enumerable: true, value: crypto.Credentials },
-  DEFAULT_ENCODING: { enumerable: true, get: function() { return crypto.DEFAULT_ENCODING; }, set: function(v) { crypto.DEFAULT_ENCODING = v; } },
+  Credentials: { enumerable: isNodeBelowVersion10, value: isNodeBelowVersion10 ? crypto.Credentials : undefined /* there is no reasonable alternative */ },
+  DEFAULT_ENCODING: { enumerable: isNodeBelowVersion10, get: function () { return isNodeBelowVersion10 ? crypto.DEFAULT_ENCODING : "buffer"; /* buffer was the default */ }, set: function (v) { crypto.DEFAULT_ENCODING = v; } },
   Decipher: { enumerable: true, value: crypto.Decipher },
   Decipheriv: { enumerable: true, value: crypto.Decipheriv },
   DiffieHellman: { enumerable: true, value: crypto.DiffieHellman },
@@ -17,10 +19,10 @@ Object.defineProperties(module.exports, {
   Sign: { enumerable: true, value: crypto.Sign },
   Verify: { enumerable: true, value: crypto.Verify },
   //_toBuf: // skipping
-  constants: { enumerable: true, get: function() { return crypto.constants; }, set: function(v) { crypto.constants = v; } },
+  constants: { enumerable: true, get: function () { return crypto.constants; }, set: function (v) { crypto.constants = v; } },
   createCipher: { enumerable: true, value: bind(crypto, crypto.createCipher) },
   createCipheriv: { enumerable: true, value: bind(crypto, crypto.createCipheriv) },
-  createCredentials: { enumerable: true, value: bind(crypto, crypto.createCredentials) },
+  createCredentials: { enumerable: isNodeBelowVersion10, value: isNodeBelowVersion10 ? bind(crypto, crypto.createCredentials) : bind(tls, tls.createSecureContext) },
   createDecipher: { enumerable: true, value: bind(crypto, crypto.createDecipher) },
   createDecipheriv: { enumerable: true, value: bind(crypto, crypto.createDecipheriv) },
   createDiffieHellman: { enumerable: true, value: bind(crypto, crypto.createDiffieHellman) },
