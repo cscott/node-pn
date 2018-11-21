@@ -7,9 +7,7 @@ Object.defineProperties(module.exports, {
   clearImmediate: { enumerable: true, value: bind(timers, timers.clearImmediate) },
   clearInterval: { enumerable: true, value: bind(timers, timers.clearInterval) },
   clearTimeout: { enumerable: true, value: bind(timers, timers.clearTimeout) },
-  enroll: { enumerable: true, value: bind(timers, timers.enroll) },
   setImmediate: { enumerable: true, value: promisify(timers, timers.setImmediate, 0, {"noError":true,"callbackIsFirstArg":true}) },
   setInterval: { enumerable: true, value: bind(timers, timers.setInterval) },
   setTimeout: { enumerable: true, value: promisify(timers, timers.setTimeout, 0, {"noError":true,"callbackIsFirstArg":true}) },
-  unenroll: { enumerable: true, value: bind(timers, timers.unenroll) },
 });
